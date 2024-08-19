@@ -1,0 +1,149 @@
+height: &height 576
+width: &width 576
+model:
+  structure:
+    backbone: STDCNet813
+    n_classes: 4
+    use_boundary_2: &use_boundary_2 false
+    use_boundary_4: &use_boundary_4 false
+    use_boundary_8: &use_boundary_8 true
+    use_boundary_16: &use_boundary_16 false
+    use_conv_last: false
+    pretrain_model: /mnt/afs/lishengye/code/stdc_R2/stdc-seg-dev_dingdashan/pre_train/STDCNet813M_73.91.tar
+  ckpt: ''
+
+loss:
+  type: OhemCELoss
+  params:
+    ignore_idx: -1
+    score_thres: 0.7 # 0.7
+    size: [*width, *height]
+    batch: &batch 32
+    weight: [1.0, 1.0, 1.0, 1.0]
+  
+optim:
+  momentum: 0.9
+  wd: 0.0005 #weight decay 0.0005
+  lr0: 0.01 # initial learning rate
+  max_iter: &max_iter 18000
+  power: 0.95
+  warmup_steps: 800
+  warmup_start_lr: 0.0001 # 0.00001
+
+train:
+  info_freq: 20
+  max_iter: *max_iter
+  save_iter_sep: 1000
+  batch_size: *batch
+  use_boundary_2: *use_boundary_2
+  use_boundary_4: *use_boundary_4
+  use_boundary_8: *use_boundary_8
+  use_boundary_16: *use_boundary_16
+  classes:
+    - bakground
+    - board
+    - robot
+    - piece
+
+data:
+  loader:
+    num_workers: 40
+    batch_size: *batch
+    pin_memory: false
+    prefetch_factor: 4
+    persistent_workers: true
+
+  trainset:
+    meta:
+      - /mnt/afs/lishengye/code/stdc_general/meta/R3_V010_train_board.txt
+      - /mnt/afs/lishengye/code/stdc_general/meta/R3_V010_train_piece_cluster.txt
+
+    anno: &anno_type V2
+
+    ctxt_aug:
+      background:
+        p: 0.85
+        meta: 
+          - /mnt/afs/lishengye/code/stdc_general/meta/R3_train_empty_board.txt
+          # - /mnt/afs/lishengye/code/stdc_R3/meta/R3_train_empty_board.txt
+          # - /mnt/afs/lishengye/code/stdc_R3/meta/R3_train_empty_board.txt
+          # - /mnt/afs/lishengye/code/stdc_R3/meta/R3_train_empty_board.txt
+          # - /mnt/afs/lishengye/code/stdc_R3/meta/R3_train_empty_board.txt
+          # - /mnt/afs/lishengye/code/stdc_R3/meta/R1_background.txt
+      pieces:
+        p: 0.8
+        meta: 
+          - /mnt/afs/lishengye/code/stdc_general/meta/R3_V010_train_piece_cluster.txt
+      sundry:
+        p: 0.2
+        meta:
+          - /mnt/afs/lishengye/code/stdc_general/meta/R2_train_sundry.txt
+      hand: 
+        p: 0.3
+        meta: 
+          - /mnt/afs/lishengye/code/stdc_general/meta/R2_train_hand.txt
+      robot:
+        p: 0.6
+        meta:
+          - /mnt/afs/lishengye/code/stdc_general/meta/R3_V010_train_robot_clean.txt
+          # - /mnt/afs/lishengye/code/stdc_R3/meta/R2_train_robot.txt
+      shadow:
+        p: 0.4
+        meta: null
+
+    albu_aug:
+      - ShiftScaleRotate:
+          p: 0
+      - Perspective:
+          p: 0.5
+          scale: [0.8, 2.0]
+      - ColorJitter:
+          brightness: [0.5, 1.5]
+          contrast: [0.8, 1]
+          saturation: [0.8, 1]
+          p: 0.4
+      - ChannelShuffle:
+          p: 0.1
+      - CLAHE:
+          p: 0.2
+      - Rotate:
+          p: 0.3
+          limit: [-30, 30]
+      - HorizontalFlip:
+          p: 0.5
+      - VerticalFlip:
+          p: 0.3
+      - ImageCompression:
+          p: 0.3
+      - RandomSunFlare:
+          p: 0
+      - MotionBlur:
+          blur_limit: 11
+          p: 0
+      - GaussNoise:
+          p: 0.2
+      - ISONoise:
+          p: 0.3
+      - ToGray:
+          p: 0.2
+      - Resize:
+          height: *height
+          width: *width
+          p: 1
+          always_apply: True
+
+  testset:
+    all:
+      meta:
+        - /mnt/afs/lishengye/code/stdc_general/meta/R3_V020_test.txt
+
+      anno: *anno_type
+
+      ctxt_aug: null
+
+      albu_aug:
+        - Resize:
+            height: *height
+            width: *width
+            p: 1
+            always_apply: True   
