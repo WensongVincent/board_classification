@@ -1,0 +1,23 @@
+{
+    "general": {
+        "mode": "test",
+        "save_path": "/mnt/afs/huwensong/workspace/R4_board_classification/result/test_result_0819_1"
+    },
+
+    "test_dataset": {
+        "path": "/mnt/afs/huwensong/workspace/R4_board_classification/metadata/metadata_0813_2_test.json",
+        "shuffle": false,
+        "num_workers": 4
+    },
+
+    "model": {
+        "type": "resnet18",
+        "num_classes": 4,
+        "scale": 1,
+        "ckpt_path": "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0813_3/ckpt.pth"
+    },
+
+    "test": {
+        "batch_size": 32
+    }
+}
