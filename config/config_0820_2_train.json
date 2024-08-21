@@ -1,0 +1,41 @@
+{
+    "general": {
+        "mode": "train",
+        "save_path": "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0820_2"
+    },
+
+    "train_dataset": {
+        "path": "/mnt/afs/huwensong/workspace/R4_board_classification/metadata/metadata_0813_2_train.json",
+        "aug_meta_dirs": [[0.2, "/mnt/afs/lishengye/code/stdc_general/meta/R2_train_sundry.txt"],
+                          [0.2, "/mnt/afs/lishengye/code/stdc_general/meta/R2_train_hand.txt"],
+                          [0.2, "/mnt/afs/lishengye/code/stdc_general/meta/R3_V010_train_robot_clean.txt"]],
+        "shuffle": true,
+        "num_workers": 4
+    },
+
+    "test_dataset": {
+        "path": "/mnt/afs/huwensong/workspace/R4_board_classification/metadata/metadata_0813_2_test.json",
+        "shuffle": false,
+        "num_workers": 4
+    },
+
+    "model": {
+        "type": "resnet18",
+        "num_classes": 4,
+        "scale": 1,
+        "ckpt_path": "default"
+    },
+
+    "train": {
+        "lr": 1e-3,
+        "num_epochs": 10,
+        "weight_decay": 1e-5,
+        "batch_size": 32,
+        "lr_decay_step": 3,
+        "lr_decay": 1e-1
+    },
+
+    "test": {
+        "batch_size": 32
+    }
+}

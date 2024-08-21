@@ -1,7 +1,8 @@
 {
     "general": {
         "mode": "train",
-        "save_path": "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0813_3"
+        "save_path": "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0820_6",
+        "changes": "back to random interpolate during resize for train and also val"
     },
 
     "train_dataset": {

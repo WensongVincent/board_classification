@@ -1,8 +1,8 @@
 import cv2
 import os
 
-input_path = "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0813_3/best_validation_results.txt"
-output_dir = '/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0813_3/vis/'
+input_path = "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0820_12/best_validation_results.txt"
+output_dir = '/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0820_12/vis/'
 
 image_paths = []
 GTs = []

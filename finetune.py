@@ -12,6 +12,10 @@ from BoardDataset import BoardDataset
 from utils import save_checkpoint, save_validation_results
 from finetune_main import finetune
 
+import cv2
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
+
 
 ##############
 # main function
@@ -69,21 +73,70 @@ def main(config_path):
 
     # data processing
     # Define transformations
+    # data_transforms = {
+    #     'train': transforms.Compose([
+    #         transforms.RandomResizedCrop(224),
+    #         transforms.RandomHorizontalFlip(),
+    #         transforms.ToTensor(),
+    #         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    #     ]),
+    #     'val': transforms.Compose([
+    #         transforms.Resize(224),
+    #         transforms.CenterCrop(224),
+    #         transforms.ToTensor(),
+    #         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    #     ])
+    # }
+
+    # data_transforms = {
+    #     'train': [
+    #         'RandomResizeCrop', # Customized crop using opencv, 'RandomResizeCrop', 'RandomResize', 'Resize'
+    #         transforms.Compose([
+    #         # transforms.RandomResizedCrop(224),
+    #         transforms.RandomHorizontalFlip(),
+    #         transforms.ToTensor(),
+    #         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    #     ])],
+    #     'val': [
+    #         'RandomResize',
+    #         transforms.Compose([
+    #         # transforms.Resize(224),
+    #         # transforms.CenterCrop(224),
+    #         transforms.ToTensor(),
+    #         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    #     ])]
+    # }
+
     data_transforms = {
-        'train': transforms.Compose([
-            transforms.RandomResizedCrop(224),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        'train': A.Compose([
+            A.RandomResizedCrop(height=224, width=224),
+            A.HorizontalFlip(p=0.5),
+            # A.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4, hue=0.1),
+            A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+            ToTensorV2()  # Converts NumPy array to PyTorch tensor
         ]),
-        'val': transforms.Compose([
-            transforms.Resize(224),
-            transforms.CenterCrop(224),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ]),
+        'val': A.Compose([
+            A.Resize(height=224, width=int(1920 * (224/1080))),
+            A.CenterCrop(height=224, width=224),
+            A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+            ToTensorV2()  # Converts NumPy array to PyTorch tensor
+        ])
     }
 
+    # data_transforms = {
+    #     'train': A.Compose([
+    #         A.Resize(height=224, width=224, interpolation=cv2.INTER_AREA),
+    #         A.HorizontalFlip(p=0.5),
+    #         # A.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4, hue=0.1),
+    #         A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+    #         ToTensorV2()  # Converts NumPy array to PyTorch tensor
+    #     ]),
+    #     'val': A.Compose([
+    #         A.Resize(height=224, width=224, interpolation=cv2.INTER_AREA),
+    #         A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+    #         ToTensorV2()  # Converts NumPy array to PyTorch tensor
+    #     ])
+    # }
 
     # Create datasets
     print(f"Using train dataset from {train_meta_dir}")
@@ -133,4 +186,4 @@ def main(config_path):
 
 if __name__ == '__main__':
     ####### CHANGE this for different training ######
-    main('/mnt/afs/huwensong/workspace/R4_board_classification/config/config_0813_3_train.json')
+    main('/mnt/afs/huwensong/workspace/R4_board_classification/config/config_0820_13_train.json')

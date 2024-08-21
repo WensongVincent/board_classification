@@ -44,12 +44,14 @@ def main(config_path):
     # data processing
     # Define transformations
     data_transforms = {
-        'val': transforms.Compose([
-            transforms.Resize(224),
-            transforms.CenterCrop(224),
+        'val': [
+            'Resize',
+            transforms.Compose([
+            # transforms.Resize(224),
+            # transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ])
+        ])]
     }
 
 
@@ -92,4 +94,4 @@ def main(config_path):
 
 if __name__ == '__main__':
     ####### CHANGE this for different training ######
-    main('/mnt/afs/huwensong/workspace/R4_board_classification/config/config_0813_3_train.json')
+    main('/mnt/afs/huwensong/workspace/R4_board_classification/config/config_0820_1_test.json')

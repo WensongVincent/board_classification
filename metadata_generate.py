@@ -36,6 +36,40 @@ from tqdm import tqdm
 #              '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240725-26_R4-GO_5.Segmentation_TestData_9x9',
 #              '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240730_R4v0.3.6.ChineseChess_5.Segmentation_TestData']
 
+# # 0813_2
+# train_dir = ['/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240731_R4v0.3.6.ChineseChess_3.Detection-Pieces_TrainData', 
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240702_R4.9.GO_3.Detection-Pieces_TestData_13x13_P1',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240702_R4.9.GO_3.Detection-Pieces_TestData_9x9_P1',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240708_R4v0.3.9.GO_3.Detection-Pieces_TestData_13x13_P2P3P4',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240708_R4v0.3.9.GO_3.Detection-Pieces_TestData_9x9_P2P3P4',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240710_R4v0.3.9.GO_5.Segmentation_TestData_13x13',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240710_R4v0.3.9.GO_5.Segmentation_TestData_9x9',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221122_R1_BGDataWithoutChessboard_User_Scenario',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221206_R1_BGDataWithoutChessboard_User_Scenario']
+# test_dir = ['/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221122_R1_BGDataWithoutChessboard_User_Scenario',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221122_25_R1_BGDataWithoutChessboard_User_Scenario',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20220812_R1_BGDataWithoutChessboard_FactoryScene',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240725-26_R4-GO_5.Segmentation_TestData_13x13',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240725-26_R4-GO_5.Segmentation_TestData_9x9',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240730_R4v0.3.6.ChineseChess_5.Segmentation_TestData']
+
+# # 0820_1
+# train_dir= ['/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240730_R4v0.3.6.ChineseChess_5.Segmentation_TestData', 
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240702_R4.9.GO_3.Detection-Pieces_TestData_13x13_P1',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240702_R4.9.GO_3.Detection-Pieces_TestData_9x9_P1',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240708_R4v0.3.9.GO_3.Detection-Pieces_TestData_13x13_P2P3P4',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240708_R4v0.3.9.GO_3.Detection-Pieces_TestData_9x9_P2P3P4',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240710_R4v0.3.9.GO_5.Segmentation_TestData_13x13',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240710_R4v0.3.9.GO_5.Segmentation_TestData_9x9',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221122_R1_BGDataWithoutChessboard_User_Scenario',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221206_R1_BGDataWithoutChessboard_User_Scenario']
+# test_dir = ['/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221122_R1_BGDataWithoutChessboard_User_Scenario',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20221122_25_R1_BGDataWithoutChessboard_User_Scenario',
+#             '/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/20240628_R1_WithoutChessboard/20220812_R1_BGDataWithoutChessboard_FactoryScene',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240725-26_R4-GO_5.Segmentation_TestData_13x13',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/5.Segmentation/20240725-26_R4-GO_5.Segmentation_TestData_9x9',
+#             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240731_R4v0.3.6.ChineseChess_3.Detection-Pieces_TrainData']
+
 # 0813_2
 train_dir = ['/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240731_R4v0.3.6.ChineseChess_3.Detection-Pieces_TrainData', 
             '/mnt/afs/share_data/R4/v0.3/data/media/raw_data/3.Detection/20240702_R4.9.GO_3.Detection-Pieces_TestData_13x13_P1',
@@ -55,7 +89,7 @@ test_dir = ['/mnt/afs/share_data/R3/v0.3/data/media/raw_data/5.Segmentation/2024
 
 
 # ===== change version for new metadata =====
-metadata_save_version = '0813_2' 
+metadata_save_version = '0820_1' 
 # ===== =============================== =====
 metadata_save_dir = '/mnt/afs/huwensong/workspace/R4_board_classification/metadata'
 metadata_save_name_train = f'metadata_{metadata_save_version}_train.json'
