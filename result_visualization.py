@@ -1,5 +1,6 @@
 import cv2
 import os
+import numpy as np
 
 input_path = "/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0820_12/best_validation_results.txt"
 output_dir = '/mnt/afs/huwensong/workspace/R4_board_classification/result/result_0820_12/vis/'
@@ -27,7 +28,10 @@ with open(input_path, 'r') as file:
                 preds.append(pred)
 
 os.makedirs(output_dir, exist_ok=True)
+confusion_matrix = np.zeros((4, 4))
 for image_path, gt, pred in zip(image_paths, GTs, preds):
     img = cv2.imread(image_path)
     time_stamp = image_path.split('/')[-2]
     cv2.imwrite(f"{output_dir}/{time_stamp}_{gt}_{pred}.jpg", img)
+    confusion_matrix[int(pred), int(gt)] += 1
+print(confusion_matrix)
